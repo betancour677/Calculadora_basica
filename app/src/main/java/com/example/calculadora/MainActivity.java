@@ -1,4 +1,5 @@
 package com.example.calculadora;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                performOperation('+');
+                if (validateFields()) {
+                    performOperation('+');
+                } else {
+                    showAlert("Por favor, complete ambos campos.");
+                }
             }
         });
 
@@ -32,15 +37,25 @@ public class MainActivity extends AppCompatActivity {
         subtractBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (validateFields()) {
                 performOperation('-');
+            } else {
+                showAlert("Por favor, complete ambos campos.");
             }
+            }
+
+
         });
 
         Button multiplyBtn = findViewById(R.id.multiplicacion);
         multiplyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                performOperation('*');
+                if (validateFields()) {
+                    performOperation('*');
+                } else {
+                    showAlert("Por favor, complete ambos campos.");
+                }
             }
         });
 
@@ -48,11 +63,28 @@ public class MainActivity extends AppCompatActivity {
         divideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                performOperation('/');
+                if (validateFields()) {
+                    performOperation('/');
+                } else {
+                    showAlert("Por favor, complete ambos campos.");
+                }
+            }
+        });
+
+        Button exitBtn = findViewById(R.id.exitBtn);
+        exitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
+        private boolean validateFields() {
+            String num1 = num1EditText.getText().toString().trim();
+            String num2 = num2EditText.getText().toString().trim();
 
+            return !num1.isEmpty() && !num2.isEmpty();
+        }
     private void performOperation(char operator) {
         double num1 = Double.parseDouble(num1EditText.getText().toString());
         double num2 = Double.parseDouble(num2EditText.getText().toString());
@@ -79,5 +111,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         resultTextView.setText(String.valueOf(result));
+    }
+    private void showAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alerta")
+                .setMessage(message)
+                .setPositiveButton("Aceptar", null)
+                .show();
     }
 }

@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -52,7 +51,7 @@
     <TableLayout
         android:id="@+id/funciones"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:visibility="visible">
@@ -95,5 +94,12 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/exitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salir" />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
